@@ -2,7 +2,7 @@
 
 # 概念对比
 
-![image-20220928104447057](E:\ES\assets\image-20220928104447057.png)
+![image-20220928104447057](.\assets\image-20220928104447057.png)
 
 # 1:索引相关
 
@@ -235,7 +235,7 @@ PUT /hotel
 
 地理坐标说明：
 
-<img src="E:\ES\assets\image-20220928111559714.png" alt="image-20220928111559714" style="zoom: 67%;" />
+<img src=".\assets\image-20220928111559714.png" alt="image-20220928111559714" style="zoom: 67%;" />
 
 
 
@@ -493,7 +493,7 @@ void addDoc() throws IOException {
 
 目的是得到响应，解析为HotelDoc，因此难点是结果的解析
 
-![image-20220928131012097](E:\ES\assets\image-20220928131012097.png)
+![image-20220928131012097](.\assets\image-20220928131012097.png)
 
 发现我们的数据是在_source里面
 
@@ -553,7 +553,7 @@ void deleteDoc() throws IOException {
 
 这里不再赘述，我们主要关注增量修改。
 
-![image-20220928131731228](E:\ES\assets\image-20220928131731228.png)
+![image-20220928131731228](.\assets\image-20220928131731228.png)
 
 ```java
 @Test
@@ -589,7 +589,7 @@ void updateDoc() throws IOException {
 
 其中提供了一个add方法，用来添加其他请求：
 
-![image-20220928132530273](E:\ES\assets\image-20220928132530273.png)
+![image-20220928132530273](.\assets\image-20220928132530273.png)
 
 可以看到，能添加的请求包括：
 
