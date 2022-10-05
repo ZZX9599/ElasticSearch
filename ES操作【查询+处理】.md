@@ -70,7 +70,7 @@ GET /indexName/_search
 - 商城的输入框搜索
 - 百度输入框搜索
 
-![image-20220928161208022](E:\ES\assets\image-20220928161208022.png)
+![image-20220928161208022](.\assets\image-20220928161208022.png)
 
 因为是拿着词条去匹配，因此参与搜索的字段也必须是可分词的text类型的字段
 
@@ -282,7 +282,7 @@ GET /hotel/_search
 
 矩形范围查询，也就是geo_bounding_box查询，查询坐标落在某个矩形范围的所有文档：
 
-<img src="E:\ES\assets\image-20220928163002420.png" alt="image-20220928163002420" style="zoom:50%;" />
+<img src=".\assets\image-20220928163002420.png" alt="image-20220928163002420" style="zoom:50%;" />
 
 查询时，需指定矩形的**左上**、**右下**两点的坐标，然后画出一个矩形，落在该矩形内的都是符合条件的点
 
@@ -341,7 +341,7 @@ GET /hotel/_search
 
 换句话来说，在地图上找一个点作为圆心，以指定距离为半径，画一个圆，落在圆内的坐标都算符合条件：
 
-![image-20220928163523741](E:\ES\assets\image-20220928163523741.png)
+![image-20220928163523741](.\assets\image-20220928163523741.png)
 
 语法说明：
 
@@ -424,7 +424,7 @@ GET /hotel/_search
 
 #### 1）语法说明
 
-![image-20220928164310215](E:\ES\assets\image-20220928164310215.png)
+![image-20220928164310215](.\assets\image-20220928164310215.png)
 
 function score 查询中包含四部分内容：
 
@@ -790,7 +790,7 @@ GET /hotel/_search
 
 不过，elasticsearch内部分页时，必须先查询 0~1000条，然后截取其中的990 ~ 1000的这10条：
 
-![image-20220928172321574](E:\ES\assets\image-20220928172321574.png)
+![image-20220928172321574](.\assets\image-20220928172321574.png)
 
 查询TOP1000，如果es是单点模式，这并无太大影响。
 
@@ -800,7 +800,7 @@ GET /hotel/_search
 
 因此要想获取整个集群的TOP1000，必须先查询出每个节点的TOP1000，汇总结果后，重新排名，重新截取TOP1000。
 
-![image-20220928172411950](E:\ES\assets\image-20220928172411950.png)
+![image-20220928172411950](.\assets\image-20220928172411950.png)
 
 那如果我要查询9900~10000的数据呢？是不是要先查询TOP10000呢？那每个节点都要查询10000条？汇总到内存中？
 
@@ -839,7 +839,7 @@ GET /hotel/_search
 
 我们在百度，京东搜索时，关键字会变成红色，比较醒目，这叫高亮显示：
 
-![image-20220928172715397](E:\ES\assets\image-20220928172715397.png)
+![image-20220928172715397](.\assets\image-20220928172715397.png)
 
 这种红色的带有我们搜索的变成了红色，就是高亮
 
@@ -936,7 +936,7 @@ GET /hotel/_search
 
 整体查询结果处理的示例：
 
-![image-20220928173842352](E:\ES\assets\image-20220928173842352.png)
+![image-20220928173842352](.\assets\image-20220928173842352.png)
 
 
 
@@ -965,17 +965,17 @@ GET /hotel/_search
 
 这里关键的API有两个，一个是`request.source()`，其中包含了查询、排序、分页、高亮等所有功能：
 
-<img src="E:\ES\assets\image-20220928214008197.png" alt="image-20220928214008197" style="zoom:50%;" />
+<img src=".\assets\image-20220928214008197.png" alt="image-20220928214008197" style="zoom:50%;" />
 
 另一个是`QueryBuilders`，其中包含match、term、function_score、bool等各种查询：
 
-![image-20220928214046370](E:\ES\assets\image-20220928214046370.png)
+![image-20220928214046370](.\assets\image-20220928214046370.png)
 
 ### 3.1.2:解析响应
 
 响应结果的解析：
 
-![image-20220928214135604](E:\ES\assets\image-20220928214135604.png)
+![image-20220928214135604](.\assets\image-20220928214135604.png)
 
 elasticsearch返回的结果是一个JSON字符串，结构包含：
 
@@ -1047,7 +1047,7 @@ void matchAll() throws IOException {
 
 全文检索的match和multi_match查询与match_all的API基本一致。差别是查询条件，也就是query的部分
 
-![image-20220928220121184](E:\ES\assets\image-20220928220121184.png)
+![image-20220928220121184](.\assets\image-20220928220121184.png)
 
 因此，Java代码上的差异主要是request.source().query()中的参数了。同样是利用QueryBuilders提供的方法
 
@@ -1161,7 +1161,7 @@ void testRange() throws IOException {
 
 布尔查询是用must、must_not、filter等方式组合其它查询，代码示例如下：
 
-![image-20220928222453714](E:\ES\assets\image-20220928222453714.png)
+![image-20220928222453714](.\assets\image-20220928222453714.png)
 
 API与其它查询的差别同样是在查询条件的构建，QueryBuilders，结果解析等其他代码完全不变
 
@@ -1198,11 +1198,11 @@ void testBoolean() throws IOException {
 
 function_score查询结构如下：
 
-![image-20220930163530473](E:\ES\assets\image-20220930163530473.png)
+![image-20220930163530473](.\assets\image-20220930163530473.png)
 
 对应的JavaAPI如下：
 
-![image-20220930163549583](E:\ES\assets\image-20220930163549583.png)
+![image-20220930163549583](.\assets\image-20220930163549583.png)
 
 我们可以将之前写的boolean查询作为**原始查询**条件放到query中，接下来就是添加**过滤条件**、**算分函数**、**加权模式**了。所以原来的代码依然可以沿用
 
@@ -1233,7 +1233,7 @@ FunctionScoreQueryBuilder functionScoreQueryBuilder=QueryBuilders.functionScoreQ
 
 对应的API如下：
 
-![image-20220928223313348](E:\ES\assets\image-20220928223313348.png)
+![image-20220928223313348](.\assets\image-20220928223313348.png)
 
 示例：查询前面30条数据
 
@@ -1297,7 +1297,7 @@ void testOrder() throws IOException {
 
 查找出最近的酒店，一般要显示距离，距离和sources在同一级别
 
-![image-20220930160808905](E:\ES\assets\image-20220930160808905.png)
+![image-20220930160808905](.\assets\image-20220930160808905.png)
 
 sort就是距离信息，单位是什么，查出来的就是什么
 
@@ -1324,7 +1324,7 @@ if(sortValues.length>0){
 
 高亮请求的构建API如下：
 
-![image-20220928224609216](E:\ES\assets\image-20220928224609216.png)
+![image-20220928224609216](.\assets\image-20220928224609216.png)
 
 上述代码省略了查询条件部分，但是大家不要忘了：高亮查询必须使用全文检索查询
 
@@ -1344,7 +1344,7 @@ if(sortValues.length>0){
 
 因此解析高亮的代码需要额外处理：
 
-![image-20220928225802717](E:\ES\assets\image-20220928225802717.png)
+![image-20220928225802717](.\assets\image-20220928225802717.png)
 
 所以解析高亮结果就只是比之前多一点点而已
 
